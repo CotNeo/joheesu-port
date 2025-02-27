@@ -1,3 +1,5 @@
+
+** Orginal Deploy **
 url: https://hsphotography.site/
 # 📸 Admin Panel - Kategori & Görsel Yönetimi
 
