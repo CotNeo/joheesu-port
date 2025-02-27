@@ -1,14 +1,58 @@
+/* Scroll Top Butonu */
 .scroll {
   position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: var(--padding-responsive);
-  z-index: 1000;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
   transform: translateY(100%);
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
 
-  &.visible {
-    transform: translateY(0);
+/* Göründüğünde */
+.scroll.visible {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hover Efekti */
+.scroll:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Mobil Cihazlar İçin */
+@media (max-width: 768px) {
+  .scroll {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+    bottom: 1rem;
+    right: 1rem;
   }
 }

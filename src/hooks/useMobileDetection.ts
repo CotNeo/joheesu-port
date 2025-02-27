@@ -1,11 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-const useMobileDetection = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  
+const useMobileDetection = (): boolean => {
+  const getIsMobile = useCallback(
+    () => /android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768,
+    []
+  );
+
+  const [isMobile, setIsMobile] = useState(getIsMobile);
+
   useEffect(() => {
-    setIsMobile(/android|iPhone|iPad|iPod/i.test(navigator.userAgent));
-  }, []);
+    const handleResize = () => {
+      setIsMobile(getIsMobile());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [getIsMobile]);
 
   return isMobile;
 };

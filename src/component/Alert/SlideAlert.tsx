@@ -1,36 +1,32 @@
-import React, { useEffect } from 'react';
-import styles from './SlideAlert.module.scss';
-import useMobileDetection from '../../hooks/useMobileDetection';
+import React, { useEffect, useState, useMemo } from "react";
+import styles from "./SlideAlert.module.scss";
+import useMobileDetection from "../../hooks/useMobileDetection";
 
 interface AlertProps {
-  direction: "vertical" | "horizontal",
-  storageKey: string
+  direction: "vertical" | "horizontal";
+  storageKey: string;
 }
 
-function SlideAlert({ direction, storageKey }: AlertProps) {
+const SlideAlert: React.FC<AlertProps> = ({ direction, storageKey }) => {
   const isMobile = useMobileDetection();
+  const [isVisible, setIsVisible] = useState(false);
 
-  const message = direction === 'vertical' ? 'Swipe up or down' : 'Swipe left or right';
+  // Mesajı belirleme işlemi gereksiz renderları önlemek için useMemo ile optimize edildi
+  const message = useMemo(
+    () => (direction === "vertical" ? "Swipe up or down" : "Swipe left or right"),
+    [direction]
+  );
 
   useEffect(() => {
-    const hasSeenAlert = sessionStorage.getItem(storageKey);
-    
-    if (!hasSeenAlert) {
-      sessionStorage.setItem(storageKey, 'true');
+    if (!sessionStorage.getItem(storageKey)) {
+      sessionStorage.setItem(storageKey, "true");
+      setIsVisible(true);
     }
   }, [storageKey]);
 
-  if (!isMobile || sessionStorage.getItem(storageKey)) {
-    return null;
-  }
+  if (!isMobile || !isVisible) return null;
 
-  return (
-    <>
-      <div className={styles.slideAlert}>
-        {message}
-      </div>
-    </>
-  );
-}
+  return <div className={styles.slideAlert}>{message}</div>;
+};
 
 export default SlideAlert;

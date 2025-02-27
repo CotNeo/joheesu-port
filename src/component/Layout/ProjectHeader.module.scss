@@ -5,15 +5,50 @@
   margin: var(--margin-responsive);
   display: flex;
   align-items: flex-end;
+  justify-content: center;
 }
 
+/* Başlık */
 .title {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
-  mix-blend-mode: difference;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   text-align: center;
+  font-weight: 700;
+  letter-spacing: 2px;
+  mix-blend-mode: difference;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0.9;
+}
+
+/* Hover efekti */
+.title:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Mobil uyumluluk */
+@media (max-width: 768px) {
+  .projectHeader {
+    height: 18vh;
+  }
+
+  .title {
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    letter-spacing: 1.5px;
+  }
+}
+
+@media (max-width: 479px) {
+  .projectHeader {
+    height: 16vh;
+  }
+
+  .title {
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    letter-spacing: 1px;
+  }
 }

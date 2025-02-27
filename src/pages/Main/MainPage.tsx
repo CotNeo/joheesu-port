@@ -1,16 +1,16 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import gsap from 'gsap';
-import styles from './MainPage.module.scss';
-import MainPageImages from '../../data/MainPageImages';
-import Logo from '../../component/Layout/Logo';
-import MouseFollower from '../../component/Layout/MouseFollower';
+import React, { Suspense, lazy, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import gsap from "gsap";
+import styles from "./MainPage.module.scss";
+import MainPageImages from "../../data/MainPageImages";
+import Logo from "../../component/Layout/Logo";
+import MouseFollower from "../../component/Layout/MouseFollower";
 
-const SlideAlert = lazy(() => import('../../component/Alert/SlideAlert'));
+const SlideAlert = lazy(() => import("../../component/Alert/SlideAlert"));
 
 function MainPage() {
-  const [currentProject, setCurrentProject] = useState({ id: '', title: '', category: '' });
+  const [currentProject, setCurrentProject] = useState({ id: "", title: "", category: "" });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,34 +29,35 @@ function MainPage() {
 
       let timeline = gsap.timeline({
         defaults: { duration: 1.25, ease: "power1.inOut" },
-        onComplete: () => (animating = false)
+        onComplete: () => (animating = false),
       });
 
       if (currentIndex >= 0) {
         gsap.set(sections[currentIndex], { zIndex: 0 });
-        timeline.to(images[currentIndex], { yPercent: -15 * direction })
-          .set(sections[currentIndex], { autoAlpha: 0 });
+        timeline.to(images[currentIndex], { yPercent: -15 * direction }).set(sections[currentIndex], { autoAlpha: 0 });
       }
 
       gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
-      timeline.fromTo(
-        [outerWrappers[index], innerWrappers[index]],
-        { yPercent: (i) => (i ? -100 * direction : 100 * direction) },
-        { yPercent: 0 },
-        0
-      ).fromTo(images[index], { yPercent: 15 * direction }, { yPercent: 0 }, 0)
+      timeline
+        .fromTo(
+          [outerWrappers[index], innerWrappers[index]],
+          { yPercent: (i) => (i ? -100 * direction : 100 * direction) },
+          { yPercent: 0 },
+          0
+        )
+        .fromTo(images[index], { yPercent: 15 * direction }, { yPercent: 0 }, 0);
 
       currentIndex = index;
 
       setCurrentProject(MainPageImages[index]);
-    }
+    };
 
     const handleWheel = (event: WheelEvent) => {
       if (!animating) {
         const direction = event.deltaY > 0 ? 1 : -1;
         gotoSection(currentIndex + direction, direction);
       }
-    }
+    };
 
     let touchStartY = 0;
     let touchEndY = 0;
@@ -81,18 +82,18 @@ function MainPage() {
 
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener('wheel', handleWheel);
+    window.addEventListener("wheel", handleWheel);
 
     gotoSection(0, 1);
 
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
-      window.addEventListener('wheel', handleWheel);
+      window.addEventListener("wheel", handleWheel);
     };
   }, []);
 
-  const handleSectionClick = (category, title) => {
+  const handleSectionClick = (category: string, title: string) => {
     navigate(`/list/${encodeURIComponent(category)}/${encodeURIComponent(title)}`);
   };
 
@@ -101,11 +102,11 @@ function MainPage() {
       <Logo />
       <MouseFollower />
 
-      <Suspense fallback={<div>Loading alert...</div>}>
+      <Suspense fallback={<div>Yükleniyor...</div>}>
         <SlideAlert direction="vertical" storageKey="mainPageAlertShown" />
       </Suspense>
 
-      <p className={styles.copyright}>@ 2024</p>
+      <p className={styles.copyright}>© 2025</p>
 
       <div className={styles.container}>
         <div>
@@ -113,7 +114,7 @@ function MainPage() {
           <p>{currentProject.title}</p>
           <p>{currentProject.category}</p>
         </div>
-        <p>scroll</p>
+        <p>kaydır</p>
       </div>
 
       {MainPageImages.map((project) => (
@@ -129,7 +130,7 @@ function MainPage() {
 }
 
 const Section = ({ id, bgUrlArray, onClick }) => {
-  const [bgUrl, setBgUrl] = useState('');
+  const [bgUrl, setBgUrl] = useState("");
 
   useEffect(() => {
     const updateBgUrl = () => {
@@ -148,10 +149,10 @@ const Section = ({ id, bgUrlArray, onClick }) => {
     };
 
     updateBgUrl();
-    window.addEventListener('resize', updateBgUrl);
+    window.addEventListener("resize", updateBgUrl);
 
     return () => {
-      window.removeEventListener('resize', updateBgUrl);
+      window.removeEventListener("resize", updateBgUrl);
     };
   }, [bgUrlArray]);
 
@@ -159,12 +160,13 @@ const Section = ({ id, bgUrlArray, onClick }) => {
     <section id={id} className={styles.section} onClick={onClick}>
       <div className={styles.wrapperOuter}>
         <div className={styles.wrapperInner}>
-          <Link to={'/list'}>
+          <Link to={"/list"}>
             <div
               className={`${styles.background} mouse-hover`}
               style={{ backgroundImage: `url(${encodeURIComponent(bgUrl)})` }}
               role="link"
-              aria-label="상세 페이지로 이동" />
+              aria-label="Detay sayfasına git"
+            />
           </Link>
         </div>
       </div>

@@ -1,60 +1,158 @@
+/* 🌟 GENEL NAVİGASYON */
 .nav {
   width: 100vw;
   position: fixed;
-  top: 5px;
+  top: 10px;
+  right: 0;
   display: flex;
   justify-content: flex-end;
-  color: #c0c0c0;
-  z-index: 100;
-
-  p {
-    margin-right: 2vw;
-    cursor: pointer;
-    transition: color 0.5s ease;
-
-    &:hover,
-    &.active {
-      color: #000;
-    }
-  }
+  align-items: center;
+  padding-right: 2vw;
+  color: #ddd;
+  background: rgba(30, 30, 30, 0.85); /* Hafif saydam arkaplan */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: background 0.3s ease-in-out;
+  backdrop-filter: blur(8px); /* Hafif bulanıklık efekti */
 }
 
+.nav p {
+  margin-left: 1.5vw;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.nav p:hover,
+.nav p.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* 🎨 KATEGORİ AÇMA BUTONU */
 .categoryButton {
   position: fixed;
-  top: 0;
-  right: 0;
-  padding: var(--padding-responsive);
-  mix-blend-mode: difference;
-  color: #6b6b6b;
-  display: none;
+  top: 15px;
+  right: 15px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #00ADB5, #007F8C);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
   z-index: 1000;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.categoryButton:hover {
+  background: linear-gradient(135deg, #32E0E6, #0096A3);
+  transform: scale(1.08);
+  box-shadow: 0 4px 10px rgba(0, 173, 181, 0.4);
+}
+
+/* 📂 KATEGORİ MENÜSÜ */
 .categoryContainer {
   z-index: 1000;
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: rgba(30, 30, 30, 0.98);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transform: translateY(-100%);
   opacity: 0;
-  transition: all 0.5s ease-in-out;
-
-  p {
-    margin: 1.2vh 0;
-  }
-
-  &.open {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
+.categoryContainer.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 📌 KATEGORİ LİNKLERİ */
+.categoryContainer ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categoryContainer li {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ddd;
+  cursor: pointer;
+  padding: 12px 18px;
+  border-radius: 8px;
+  position: relative;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out, background 0.3s ease-in-out;
+}
+
+/* 🌟 HOVER VE AKTİF DURUM */
+.categoryContainer li::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background: #00ADB5;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width 0.3s ease-in-out;
+}
+
+.categoryContainer li:hover {
+  background: rgba(0, 173, 181, 0.2);
+  color: #00ADB5;
+  transform: scale(1.1);
+}
+
+.categoryContainer li:hover::after {
+  width: 100%;
+}
+
+.categoryContainer li.active {
+  background: #00ADB5;
+  color: white;
+  font-weight: bold;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 173, 181, 0.4);
+}
+
+/* ❌ KAPATMA BUTONU */
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.closeButton:hover {
+  color: #32E0E6;
+  transform: rotate(90deg);
+}
+
+/* 📱 MOBİL VE KÜÇÜK EKRANLAR İÇİN */
 @media (max-width: 640px) {
   .nav {
     display: none;
@@ -65,10 +163,19 @@
   }
 }
 
-.closeButton {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: var(--padding-responsive);
-  font-size: 1rem;
+@media (max-width: 480px) {
+  .categoryContainer li {
+    font-size: 1.2rem;
+    padding: 10px 15px;
+  }
+
+  .closeButton {
+    font-size: 1.2rem;
+  }
 }
+/* 📌 Eğer buton .categoryButton ise tamamen gizle */
+.categoryButton {
+  display: none !important;
+}
+
+

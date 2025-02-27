@@ -1,60 +1,102 @@
+/* Genel Değişkenler */
 :root {
-  --padding-responsive: 5px 1vw;
-  --margin-responsive: 0 1vw;
-  --width-responsive: 98vw;
+  --padding-responsive: 8px 1.2vw;
+  --margin-responsive: 0 1.2vw;
+  --width-responsive: 97vw;
+  --primary-color: #222; /* Genel renk tonu */
+  --secondary-color: #555;
+  --accent-color: #007bff; /* Vurgulu renk */
 }
 
 @media (max-width: 479px) {
   :root {
-    --padding-responsive: 10px 2vw;
-    --margin-responsive: 0 2vw;
-    --width-responsive: 96vw;
+    --padding-responsive: 12px 3vw;
+    --margin-responsive: 0 3vw;
+    --width-responsive: 95vw;
   }
 }
 
+/* Genel Sayfa Stilleri */
 body {
-  background-color: #fff;
+  background-color: #fefefe;
+  color: var(--primary-color);
   margin: 0;
-  -ms-overflow-style: none;
+  padding: 0;
   font-size: 16px;
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Yan scroll barı tamamen kaldır */
 }
 
+/* Scrollbar Gizleme (Safari hariç) */
 body::-webkit-scrollbar {
-  display: none;
+  width: 0;
+  height: 0;
 }
 
+/* Link Stilleri */
 a {
   text-decoration: none;
-  color: inherit;
+  color: var(--accent-color);
+  transition: color 0.3s ease-in-out;
 }
 
+a:hover {
+  color: #0056b3; /* Daha koyu bir mavi hover efekti */
+}
+
+/* Inline Eleman */
 .inline {
   display: inline;
 }
 
+/* Pointer Stili */
 .pointer {
   cursor: pointer;
   text-decoration: underline;
+  transition: opacity 0.2s ease-in-out;
 }
 
+.pointer:hover {
+  opacity: 0.8;
+}
+
+/* Başlık Stilleri */
 h1 {
   margin: 0;
   font-weight: 800;
-  letter-spacing: 8px;
+  letter-spacing: 6px;
+  font-size: 2rem;
 }
 
 p {
   margin: 0;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--secondary-color);
 }
 
+/* Mobil Uyumlu Başlıklar */
 @media (max-width: 479px) {
   h1 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
   }
 
   p {
-    font-size: 0.8rem
+    font-size: 0.9rem;
   }
+}
+
+/* Genel Seçim Efekti */
+::selection {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+/* Geçiş Efekti Ekleme */
+* {
+  transition: all 0.2s ease-in-out;
 }

@@ -1,45 +1,59 @@
+/* Genel Konteyner Stili */
 .container {
   width: 70vw;
-  margin: 0 15vw;
-  padding-top: 25vh;
+  margin: 0 auto;
+  padding-top: 20vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
+/* Profil Resmi */
 .profileImg {
   width: 25vw;
   height: 58vh;
-  margin: 0 5vw;
   object-fit: cover;
+  border-radius: 12px; /* Hafif yuvarlatılmış köşeler */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
 }
 
+/* Yan Bölüm */
 .side {
   width: 30vw;
-  margin-left: 5vw;
-  height: 58vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
 }
 
+/* Link Kutusu */
 .linkBox {
   display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
+/* Link ve Link Türü */
 .linkType,
 .link {
   display: flex;
   flex-direction: column;
+  font-weight: bold;
 }
 
 .linkType {
-  font-weight: bolder;
-  margin-right: 3vw;
+  margin-right: 2vw;
+  color: #444; /* Hafif gri ton */
 }
 
+/* Kopyalama Başarılı Mesajı */
 .copySuccess {
   position: absolute;
   margin-left: 1vw;
-  color: brown;
+  color: #d9534f;
   text-decoration: none;
   opacity: 0;
   animation: fadeInOut 2s forwards;
@@ -49,81 +63,86 @@
   0% {
     opacity: 0;
   }
-
   10% {
     opacity: 1;
   }
-
   90% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
   }
 }
 
+/* Alt Bilgi */
 .siteBy {
-  font-size: xx-small;
+  font-size: 12px;
   color: #848482;
   position: fixed;
   bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
+  opacity: 0.8;
 }
 
-@media (max-width:1023px) and (min-width:768px) {
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
   .container {
     width: 80vw;
-    margin: 0 10vw 20vh;
+    padding-top: 15vh;
   }
 
   .profileImg {
     width: 30vw;
-    height: 58vh;
-    margin: 0 5vw;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .side {
+    width: 40vw;
+    margin: 0 auto;
   }
 }
 
-@media (max-width:767px) {
+/* Küçük Tablet & Büyük Telefon (max 767px) */
+@media (max-width: 767px) {
   .container {
-    display: block;
-    width: 50vw;
-    margin: 0 25vw 20vh;
+    flex-direction: column;
+    width: 90vw;
+    padding-top: 12vh;
   }
 
   .profileImg {
-    width: 100%;
-    height: 50vh;
-    margin: 0;
+    width: 80%;
+    height: auto;
   }
 
   .side {
     width: 100%;
-    margin: 5vh 0;
-    height: 22vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    text-align: center;
+    margin-top: 3vh;
   }
 
   .linkBox {
-    width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
+/* Küçük Telefonlar (max 479px) */
 @media (max-width: 479px) {
   .container {
-    padding-top: 22vh;
+    width: 90vw;
     font-size: 14px;
-    width: 70vw;
-    margin: 0 15vw;
+    padding-top: 10vh;
   }
 
   .profileImg {
-    width: 50vw;
-    height: 38vh;
-    margin: 0 10vw;
+    width: 70vw;
+    height: auto;
+  }
+
+  .side {
+    width: 100%;
+    text-align: center;
   }
 }

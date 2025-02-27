@@ -1,87 +1,101 @@
+/* Butonlar */
 .buttons {
   position: absolute;
-  top: 21.5vh;
+  top: 20vh;
   transform: translateY(-100%);
   width: var(--width-responsive);
   margin: var(--margin-responsive);
   display: flex;
   justify-content: space-between;
-
-  p {
-    cursor: pointer;
-    color: #c0c0c0;
-    transition: color 0.3s ease;
-
-    &:hover,
-    &.active {
-      color: #000;
-    }
-  }
+  align-items: center;
+  z-index: 10; /* Üstte tut */
 }
 
+.buttons p {
+  cursor: pointer;
+  color: #a0a0a0;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: color 0.3s ease-in-out;
+}
+
+.buttons p:hover,
+.buttons p.active {
+  color: #000;
+}
+
+/* Ok İkonları */
 .arrowIcon {
-  width: 1rem;
-  height: 0.8rem;
+  width: 1.2rem;
+  height: 0.9rem;
   transform: scaleX(-1);
 }
 
+/* Grid Konteyner */
 .gridContainer {
   width: var(--width-responsive);
   margin: var(--margin-responsive);
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   cursor: pointer;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  gap: 1vw;
 }
 
+/* Fotoğraf Kolonları */
 .imageColumn {
-  width: 23.7vw;
+  width: 24vw;
   display: flex;
   flex-direction: column;
-  gap: 1.5vw;
+  gap: 1vw;
 }
 
+/* Resimler */
 .gridImg {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+  border-radius: 10px;
 }
 
+.gridImg:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Resim Konteyner */
+.imgContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Kaydırmalı Slayt Alanı */
 .slideContainer {
   width: var(--width-responsive);
   height: 78vh;
   margin: var(--margin-responsive);
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  img {
-    height: 100%;
-    width: 90%;
-    object-fit: contain;
-  }
 }
 
+.slideContainer img {
+  height: 100%;
+  width: 90%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Slayt İndeks Göstergesi */
 .slideIndex {
   margin: 5px 1vw;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 8px;
+  right: 10px;
+  font-size: 14px;
+  color: #555;
 }
 
-.imgContainer {
-  position: relative;
-  overflow: hidden;
-
-  &:hover .gridImg {
-    transform: scale(1.05);
-  }
-}
-
+/* Proje Bilgi Kartı */
 .projectInfo {
   width: 100%;
   height: 100%;
@@ -95,26 +109,33 @@
   text-align: center;
   color: #fff;
   font-size: clamp(0.8rem, 1.5vw, 1rem);
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: opacity 0.5s ease;
+  background: rgba(0, 0, 0, 0.55);
+  transition: opacity 0.3s ease-in-out;
   opacity: 0;
-
-  span:last-child {
-    font-size: smaller
-  }
-  
-  &:hover {
-    opacity: 1;
-  }
+  border-radius: 10px;
 }
 
+.projectInfo span:last-child {
+  font-size: smaller;
+  opacity: 0.9;
+}
+
+.imgContainer:hover .projectInfo {
+  opacity: 1;
+}
+
+/* Ok Butonları */
 .arrow {
   background: none;
   border: none;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   cursor: pointer;
-  color: #c0c0c0;
-  transition: color 0.3s ease;
+  color: #a0a0a0;
+  transition: color 0.3s ease-in-out;
+}
+
+.arrow:hover {
+  color: #000;
 }
 
 .leftArrow {
@@ -125,14 +146,12 @@
   right: 0;
 }
 
-.leftArrow:hover,
-.rightArrow:hover {
-  color: #000;
-}
+/* Responsive Tasarım */
 
+/* Küçük Telefonlar (max 479px) */
 @media (max-width: 479px) {
   .buttons {
-    top: 21vh;
+    top: 19vh;
   }
 
   .arrowIcon {
@@ -140,7 +159,7 @@
   }
 
   .slideContainer {
-    height: 73vh;
+    height: 72vh;
     justify-content: center;
   }
 
@@ -156,15 +175,17 @@
   }
 }
 
-
-@media (max-width:767px) {
+/* Tablet & Küçük Ekranlar (max 767px) */
+@media (max-width: 767px) {
   .imageColumn {
-    width: 30.6vw;
+    width: 31vw;
     gap: 2vw;
   }
 
   .gridContainer {
-    width: 96vw;
-    margin: 0 2vw;
+    width: 95vw;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

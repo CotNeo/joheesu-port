@@ -22,7 +22,7 @@ function List() {
 
   return (
     <>
-      <Header title={'PROJECTS'}></Header>
+      <Header title={'Portfölyo'}></Header>
 
       <Category selectedCategory={selectedCategory}></Category>
 

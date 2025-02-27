@@ -1,0 +1,43 @@
+.adminPanel {
+    background: #1e1e1e;
+    padding: 20px;
+    color: white;
+  }
+  
+  .addCategory input,
+  .addCategory button {
+    padding: 8px;
+    margin-right: 5px;
+  }
+  
+  .categoryItem {
+    display: flex;
+    justify-content: space-between;
+    background: #333;
+    padding: 10px;
+    margin: 5px 0;
+  }
+  
+  .deleteButton {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+  }
+  
+  .imageGrid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .imageItem {
+    margin: 5px;
+  }
+  
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  

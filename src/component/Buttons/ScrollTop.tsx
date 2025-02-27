@@ -1,35 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import styles from './ScrollTop.module.scss';
+import React, { useEffect, useState, useCallback } from "react";
+import styles from "./ScrollTop.module.scss";
 
-const ScrollTop = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+const ScrollTop: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 200) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
+  const toggleVisibility = useCallback(() => {
+    setIsVisible(window.pageYOffset > 200);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      requestAnimationFrame(toggleVisibility);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [toggleVisibility]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className={`${styles.scroll} ${isVisible ? styles.visible : ''}`} onClick={scrollToTop}>
-      {isVisible && <p>Top</p>}
-    </div>
+    <button
+      className={`${styles.scroll} ${isVisible ? styles.visible : ""}`}
+      onClick={scrollToTop}
+      onKeyDown={(e) => e.key === "Enter" && scrollToTop()}
+      role="button"
+      aria-label="Scroll to Top"
+    >
+      ▲
+    </button>
   );
 };
 
