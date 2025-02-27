@@ -100,7 +100,7 @@ npm start
 ---
 
 ## 👥 Katkıda Bulunanlar / Contributors
-- **[Senin Adın](https://github.com/CotNeo)** - Geliştirici
+- **[CotNeo](https://github.com/CotNeo)** - Geliştirici
 
 ---
 
